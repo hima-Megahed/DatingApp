@@ -1,3 +1,6 @@
+import { AuthGuard } from './guards/auth.guard';
+import { MessagesComponent } from './components/messages/messages.component';
+import { MemberListComponent } from './components/member-list/member-list.component';
 import { ErrorInterceptorProvider } from './services/error.interceptor.service';
 import { AuthService } from './services/auth.service';
 import { BrowserModule } from '@angular/platform-browser';
@@ -9,18 +12,22 @@ import { JwtModule } from '@auth0/angular-jwt';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { AppRoutingModule } from './app-routing.module';
+import { AppRoutingModule } from './routes';
 import { AppComponent } from './app.component';
 import { BsNavComponent } from './components/bs-nav/bs-nav.component';
 import { HomeComponent } from './components/home/home.component';
 import { RegisterComponent } from './components/register/register.component';
+import { ListsComponent } from './components/lists/lists.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     BsNavComponent,
     HomeComponent,
-    RegisterComponent
+    RegisterComponent,
+    MemberListComponent,
+    ListsComponent,
+    MessagesComponent
   ],
   imports: [
     BrowserModule,
@@ -46,6 +53,7 @@ import { RegisterComponent } from './components/register/register.component';
   ],
   providers: [
     AuthService,
+    AuthGuard,
     ErrorInterceptorProvider
   ],
   bootstrap: [AppComponent]

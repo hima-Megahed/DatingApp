@@ -51,7 +51,7 @@ namespace DatingApp.API.Controllers
                 return Unauthorized();
 
             var claims = new[] {
-                new Claim(ClaimTypes.NameIdentifier, userFromRepo.id.ToString()),
+                new Claim(ClaimTypes.NameIdentifier, userFromRepo.Id.ToString()),
                 new Claim(ClaimTypes.Name, userFromRepo.UserName)
             };
 

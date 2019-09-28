@@ -1,6 +1,7 @@
 import { AuthService } from './../../services/auth.service';
 import { Component, OnInit } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-bs-nav',
@@ -10,7 +11,7 @@ import { ToastrService } from 'ngx-toastr';
 export class BsNavComponent implements OnInit {
   model: any = {};
 
-  constructor(public authService: AuthService, private toastr: ToastrService) {}
+  constructor(public authService: AuthService, private toastr: ToastrService, private router: Router) {}
 
   ngOnInit() {}
 
@@ -20,6 +21,8 @@ export class BsNavComponent implements OnInit {
     }, error => {
       this.toastr.error('Failed to login', 'Error');
       console.log(error);
+    }, () => {
+      this.router.navigate(['/members']);
     });
   }
 
@@ -30,5 +33,6 @@ export class BsNavComponent implements OnInit {
   logout() {
     this.authService.logout();
     this.toastr.info('logged Out', 'Info');
+    this.router.navigate(['/home']);
   }
 }
