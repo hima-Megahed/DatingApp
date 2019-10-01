@@ -1,3 +1,4 @@
+import { MemberEditResolver } from './resolvers/member-edit.resolver';
 import { MemberDetailComponent } from './components/members/member-detail/member-detail.component';
 import { AuthGuard } from './guards/auth.guard';
 import { MessagesComponent } from './components/messages/messages.component';
@@ -6,8 +7,10 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { HomeComponent } from './components/home/home.component';
 import { ListsComponent } from './components/lists/lists.component';
-import { MemberDetailResolver } from './resolvers/member-detail.resolver.ts';
-import { MemberListResolver } from './resolvers/member-list.resolver.ts copy';
+import { MemberDetailResolver } from './resolvers/member-detail.resolver';
+import { MemberListResolver } from './resolvers/member-list.resolver';
+import { MemberEditComponent } from './components/members/member-edit/member-edit.component';
+import { PreventUnsavedChangesGuard } from './guards/prevent-unsaved-changes.guard';
 
 
 const routes: Routes = [
@@ -19,6 +22,12 @@ const routes: Routes = [
     children: [
       { path: 'members', component: MemberListComponent, resolve: {users: MemberListResolver}},
       { path: 'members/:id', component: MemberDetailComponent, resolve: {user: MemberDetailResolver}},
+      {
+        path: 'member/edit',
+        component: MemberEditComponent,
+        resolve: {user: MemberEditResolver},
+        canDeactivate: [PreventUnsavedChangesGuard]
+      },
       { path: 'messages', component: MessagesComponent },
       { path: 'lists', component: ListsComponent }
     ]

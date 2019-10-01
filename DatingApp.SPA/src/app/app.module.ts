@@ -1,3 +1,4 @@
+import { MemberEditResolver } from './resolvers/member-edit.resolver';
 import { MemberDetailComponent } from './components/members/member-detail/member-detail.component';
 import { environment } from './../environments/environment';
 import { MemberCardComponent } from './components/members/member-card/member-card.component';
@@ -24,8 +25,10 @@ import { HomeComponent } from './components/home/home.component';
 import { RegisterComponent } from './components/register/register.component';
 import { ListsComponent } from './components/lists/lists.component';
 import { UserService } from './services/user.service';
-import { MemberDetailResolver } from './resolvers/member-detail.resolver.ts';
-import { MemberListResolver } from './resolvers/member-list.resolver.ts copy';
+import { MemberDetailResolver } from './resolvers/member-detail.resolver';
+import { MemberListResolver } from './resolvers/member-list.resolver';
+import { MemberEditComponent } from './components/members/member-edit/member-edit.component';
+import { PreventUnsavedChangesGuard } from './guards/prevent-unsaved-changes.guard';
 
 @NgModule({
   declarations: [
@@ -36,6 +39,7 @@ import { MemberListResolver } from './resolvers/member-list.resolver.ts copy';
     MemberListComponent,
     MemberCardComponent,
     MemberDetailComponent,
+    MemberEditComponent,
     ListsComponent,
     MessagesComponent
   ],
@@ -69,7 +73,9 @@ import { MemberListResolver } from './resolvers/member-list.resolver.ts copy';
     ErrorInterceptorProvider,
     UserService,
     MemberDetailResolver,
-    MemberListResolver
+    MemberListResolver,
+    MemberEditResolver,
+    PreventUnsavedChangesGuard
   ],
   bootstrap: [AppComponent]
 })
