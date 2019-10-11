@@ -1,3 +1,4 @@
+import { PhotoEditorComponent } from './components/members/photo-editor/photo-editor.component';
 import { MemberEditResolver } from './resolvers/member-edit.resolver';
 import { MemberDetailComponent } from './components/members/member-detail/member-detail.component';
 import { environment } from './../environments/environment';
@@ -29,6 +30,7 @@ import { MemberDetailResolver } from './resolvers/member-detail.resolver';
 import { MemberListResolver } from './resolvers/member-list.resolver';
 import { MemberEditComponent } from './components/members/member-edit/member-edit.component';
 import { PreventUnsavedChangesGuard } from './guards/prevent-unsaved-changes.guard';
+import { FileUploadModule } from 'ng2-file-upload';
 
 @NgModule({
   declarations: [
@@ -40,6 +42,7 @@ import { PreventUnsavedChangesGuard } from './guards/prevent-unsaved-changes.gua
     MemberCardComponent,
     MemberDetailComponent,
     MemberEditComponent,
+    PhotoEditorComponent,
     ListsComponent,
     MessagesComponent
   ],
@@ -50,6 +53,7 @@ import { PreventUnsavedChangesGuard } from './guards/prevent-unsaved-changes.gua
     HttpClientModule,
     FormsModule,
     NgxGalleryModule,
+    FileUploadModule,
     ToastrModule.forRoot({
       positionClass: 'toast-bottom-right',
       autoDismiss: true,
