@@ -18,6 +18,7 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { TabsModule } from 'ngx-bootstrap/tabs';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { NgxGalleryModule } from 'ngx-gallery';
+import { TimeAgoPipe } from 'time-ago-pipe';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './routes';
@@ -45,7 +46,8 @@ import { FileUploadModule } from 'ng2-file-upload';
     MemberEditComponent,
     PhotoEditorComponent,
     ListsComponent,
-    MessagesComponent
+    MessagesComponent,
+    TimeAgoPipe
   ],
   imports: [
     BrowserModule,
