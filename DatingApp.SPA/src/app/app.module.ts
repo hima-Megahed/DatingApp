@@ -19,6 +19,8 @@ import { TabsModule } from 'ngx-bootstrap/tabs';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { NgxGalleryModule } from 'ngx-gallery';
 import { TimeAgoPipe } from 'time-ago-pipe';
+import { PaginationModule } from 'ngx-bootstrap/pagination';
+import { ButtonsModule } from 'ngx-bootstrap/buttons';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './routes';
@@ -74,7 +76,9 @@ import { FileUploadModule } from 'ng2-file-upload';
     }),
     BsDropdownModule.forRoot(),
     TabsModule.forRoot(),
-    BsDatepickerModule.forRoot()
+    BsDatepickerModule.forRoot(),
+    PaginationModule.forRoot(),
+    ButtonsModule.forRoot()
   ],
   providers: [
     AuthService,
