@@ -13,7 +13,7 @@ namespace DatingApp.API.Data
         private readonly DatingAppDbContext _datingAppDbContext;
         public DatingRepository(DatingAppDbContext datingAppDbContext)
         {
-            this._datingAppDbContext = datingAppDbContext;
+            _datingAppDbContext = datingAppDbContext;
 
         }
         public void Add<T>(T entity) where T : class
@@ -34,7 +34,20 @@ namespace DatingApp.API.Data
             users = users.Where(user => user.Id != userParams.UserId);
 
             // Getting users by preferred gender
-            users = users.Where(user => user.Gender == userParams.Gender);
+            if (!string.IsNullOrEmpty(userParams.Gender))
+                users = users.Where(user => user.Gender == userParams.Gender);
+
+            if (userParams.Likers)
+            {
+                var userLikers = await GetUserLikes(userParams.UserId, userParams.Likers);
+                users = users.Where(user => userLikers.Contains(user.Id));
+            }
+
+            if (userParams.Likees)
+            {
+                var userLikees = await GetUserLikes(userParams.UserId, userParams.Likers);
+                users = users.Where(user => userLikees.Contains(user.Id));
+            }
 
             // Getting users by preferred age
             var minDateOfBirth = DateTime.Now.AddYears(-userParams.MaxAge - 1);
@@ -77,6 +90,24 @@ namespace DatingApp.API.Data
         {
             return await _datingAppDbContext.Photos.Where(photo => photo.UserId == userId)
                 .FirstOrDefaultAsync(photo => photo.IsMain);
+        }
+
+        public async Task<Like> GetLike(int userId, int recipientId)
+        {
+            return await _datingAppDbContext.Likes.FirstOrDefaultAsync(like =>
+                like.LikerId == userId && like.LikeeId == recipientId);
+        }
+
+        private async Task<IEnumerable<int>> GetUserLikes(int userId, bool likers)
+        {
+            var users = await _datingAppDbContext.Users
+                .Include(user => user.Likees)
+                .Include(user => user.Likers)
+                .FirstOrDefaultAsync(user => user.Id == userId);
+
+            return likers ? 
+                users.Likers.Where(user => user.LikeeId == userId).Select(user => user.LikerId) : // Likers 
+                users.Likees.Where(user => user.LikerId == userId).Select(user => user.LikeeId); // Likees
         }
     }
 }
