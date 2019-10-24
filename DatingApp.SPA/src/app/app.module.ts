@@ -1,3 +1,4 @@
+import { MemberMessagesComponent } from './components/members/member-messages/member-messages.component';
 import { PhotoEditorComponent } from './components/members/photo-editor/photo-editor.component';
 import { MemberEditResolver } from './resolvers/member-edit.resolver';
 import { MemberDetailComponent } from './components/members/member-detail/member-detail.component';
@@ -36,6 +37,7 @@ import { MemberEditComponent } from './components/members/member-edit/member-edi
 import { PreventUnsavedChangesGuard } from './guards/prevent-unsaved-changes.guard';
 import { FileUploadModule } from 'ng2-file-upload';
 import { ListsResolver } from './resolvers/lists.resolver';
+import { MessagesResolver } from './resolvers/messages.resolver';
 
 @NgModule({
   declarations: [
@@ -47,6 +49,7 @@ import { ListsResolver } from './resolvers/lists.resolver';
     MemberCardComponent,
     MemberDetailComponent,
     MemberEditComponent,
+    MemberMessagesComponent,
     PhotoEditorComponent,
     ListsComponent,
     MessagesComponent,
@@ -90,6 +93,7 @@ import { ListsResolver } from './resolvers/lists.resolver';
     MemberListResolver,
     MemberEditResolver,
     ListsResolver,
+    MessagesResolver,
     PreventUnsavedChangesGuard
   ],
   bootstrap: [AppComponent]

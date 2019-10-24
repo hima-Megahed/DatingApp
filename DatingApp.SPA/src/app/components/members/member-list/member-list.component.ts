@@ -15,7 +15,7 @@ export class MemberListComponent implements OnInit {
   users: User[];
   pagination: Pagination;
   user: User = JSON.parse(localStorage.getItem('user'));
-  genderList = [{value: 'male', display: 'Males'}, {value: 'female', display: 'Females'}];
+  genderList = [{value: 'all', display: 'All'}, {value: 'male', display: 'Males'}, {value: 'female', display: 'Females'}];
   userParams: any = {};
 
   constructor(private route: ActivatedRoute, private userService: UserService, private toastr: ToastrService) {}
@@ -26,7 +26,10 @@ export class MemberListComponent implements OnInit {
       this.pagination = data.users.pagination;
     });
 
-    this.resetFilters();
+    this.userParams.gender = 'all';
+    this.userParams.minAge = 18;
+    this.userParams.maxAge = 99;
+    this.userParams.orderBy = 'lastActive';
   }
 
   pageChanged(event: PageChangedEvent): void {
@@ -44,7 +47,7 @@ export class MemberListComponent implements OnInit {
   }
 
   resetFilters() {
-    this.userParams.gender = this.user.gender === 'female' ? 'male' : 'female';
+    this.userParams.gender = 'all';
     this.userParams.minAge = 18;
     this.userParams.maxAge = 99;
     this.userParams.orderBy = 'lastActive';

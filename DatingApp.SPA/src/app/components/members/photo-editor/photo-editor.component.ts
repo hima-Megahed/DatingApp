@@ -55,8 +55,6 @@ export class PhotoEditorComponent implements OnInit {
           isMain: res.isMain
         };
         this.photos.push(photo);
-        console.log('photo', photo);
-        
         if (photo.isMain) {
           this.authService.changeMemberPhoto(photo.url);
           this.authService.curentUser.photoUrl = photo.url;
@@ -75,7 +73,9 @@ export class PhotoEditorComponent implements OnInit {
       this.authService.curentUser.photoUrl = photo.url;
       localStorage.setItem('user', JSON.stringify(this.authService.curentUser));
     },
-      error => { });
+      error => {
+        this.toastrService.error(error);
+      });
   }
 
   deletePhoto(id: number) {

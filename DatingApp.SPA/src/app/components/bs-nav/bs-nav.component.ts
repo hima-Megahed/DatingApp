@@ -1,5 +1,7 @@
+import { Observable, Subscription } from 'rxjs';
+import { UserService } from './../../services/user.service';
 import { AuthService } from './../../services/auth.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy, ChangeDetectorRef, Output } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 
@@ -11,11 +13,17 @@ import { Router } from '@angular/router';
 export class BsNavComponent implements OnInit {
   model: any = {};
   photoUrl: string;
+  unreadMessagesCount: number;
 
-  constructor(public authService: AuthService, private toastr: ToastrService, private router: Router) {}
+  constructor(public authService: AuthService, private userService: UserService,
+              private toastr: ToastrService, private router: Router) {}
 
   ngOnInit() {
     this.authService.currentPhotoUrl.subscribe(photoUrl => this.photoUrl = photoUrl);
+    this.userService.updateUnreadMessagesCount();
+    this.userService.unreadMessagesCount.subscribe(count => {
+      this.unreadMessagesCount = count;
+    });
   }
 
   login() {
@@ -25,6 +33,7 @@ export class BsNavComponent implements OnInit {
       this.toastr.error('Failed to login', 'Error');
       console.log(error);
     }, () => {
+      this.userService.updateUnreadMessagesCount();
       this.router.navigate(['/members']);
     });
   }

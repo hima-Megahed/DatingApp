@@ -5,6 +5,7 @@ using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
+using DatingApp.API.ActionsFilters;
 using DatingApp.API.Data;
 using DatingApp.API.Helpers;
 using DatingApp.API.Mappings;
@@ -46,7 +47,8 @@ namespace DatingApp.API
             services.AddTransient<Seed>();
             services.AddScoped<IAuthRepository, AuthRepository>();
             services.AddScoped<IDatingRepository, DatingRepository>();
-            services.AddScoped<LogUserActivity>();
+            services.AddScoped<LogUserActivityServiceFilter>();
+            services.AddScoped<ValidateUserIdentityServiceFilter>();
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options => {
                 options.TokenValidationParameters = new TokenValidationParameters
                 {

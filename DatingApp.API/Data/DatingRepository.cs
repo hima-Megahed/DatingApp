@@ -34,7 +34,7 @@ namespace DatingApp.API.Data
             users = users.Where(user => user.Id != userParams.UserId);
 
             // Getting users by preferred gender
-            if (!string.IsNullOrEmpty(userParams.Gender))
+            if (!string.IsNullOrEmpty(userParams.Gender) && userParams.Gender != "all")
                 users = users.Where(user => user.Gender == userParams.Gender);
 
             if (userParams.Likers)
@@ -96,6 +96,58 @@ namespace DatingApp.API.Data
         {
             return await _datingAppDbContext.Likes.FirstOrDefaultAsync(like =>
                 like.LikerId == userId && like.LikeeId == recipientId);
+        }
+
+        public async Task<Message> GetMessage(int messageId)
+        {
+            return await _datingAppDbContext.Messages.FirstOrDefaultAsync(m => m.Id == messageId);
+        }
+
+        public async Task<IEnumerable<Message>> GetMessageThread(int userId, int recipientId)
+        {
+            var messages = await _datingAppDbContext.Messages
+                .Include(m => m.Sender).ThenInclude(u => u.Photos)
+                .Include(m => m.Recipient).ThenInclude(u => u.Photos)
+                .Where(m => m.SenderId == userId && m.SenderDeleted == false && m.RecipientId == recipientId
+                            || m.SenderId == recipientId && m.RecipientDeleted == false && m.RecipientId == userId)
+                .OrderBy(m => m.MessageSent).ToListAsync();
+
+            return messages;
+
+        }
+
+        public async Task<PagedList<Message>> GetMessagesForUser(MessageParams messageParams)
+        {
+            var messages = _datingAppDbContext.Messages
+                .Include(m => m.Sender).ThenInclude(u => u.Photos)
+                .Include(m => m.Recipient).ThenInclude(u => u.Photos)
+                .AsQueryable();
+
+            switch (messageParams.MessageContainerType)
+            {
+                case MessageContainerType.Inbox:
+                    messages = messages.Where(m => m.RecipientId == messageParams.UserId && m.RecipientDeleted == false);
+                    break;
+                case MessageContainerType.Outbox:
+                    messages = messages.Where(m => m.SenderId == messageParams.UserId && m.SenderDeleted == false);
+                    break;
+                case MessageContainerType.Unread:
+                    messages = messages.Where(m => m.RecipientId == messageParams.UserId && m.IsRead == false && m.RecipientDeleted == false);
+                    break;
+                default:
+                    messages = messages.Where(m => m.RecipientId == messageParams.UserId && m.IsRead == false && m.RecipientDeleted == false);
+                    break;
+            }
+
+            messages = messages.OrderByDescending(m => m.MessageSent);
+
+            return await PagedList<Message>.CreateAsync(messages, messageParams.PageNumber, messageParams.PageSize);
+        }
+
+        public async Task<int> GetUnreadMessagesCount(int userId)
+        {
+            return await _datingAppDbContext.Messages.CountAsync(m =>
+                m.RecipientId == userId && m.IsRead == false && m.RecipientDeleted == false);
         }
 
         private async Task<IEnumerable<int>> GetUserLikes(int userId, bool likers)

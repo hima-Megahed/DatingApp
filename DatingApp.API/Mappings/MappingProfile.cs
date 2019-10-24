@@ -26,14 +26,26 @@ namespace DatingApp.API.Mappings
             .ForMember(userForDetailDto => userForDetailDto.Age, option => {
                 option.MapFrom((user, userForDetailDto) => DateTime.Today.Year - user.DateOfBirth.Year);
             });
-            
+
+            CreateMap<Message, MessagesToReturnDto>()
+                .ForMember(messageForReturnDto => messageForReturnDto.SenderPhotoUrl, option =>
+                {
+                    option.MapFrom(u => u.Sender.Photos.FirstOrDefault(photo => photo.IsMain).Url);
+                })
+                .ForMember(messageForReturnDto => messageForReturnDto.RecipientPhotoUrl, option =>
+                {
+                    option.MapFrom(u => u.Recipient.Photos.FirstOrDefault(photo => photo.IsMain).Url);
+                });
+
             CreateMap<Photo, PhotosForDetailDto>();
             CreateMap<Photo, PhotoForReturnDto>();
+            
 
             // Dtos to Model
             CreateMap<UserForUpdateDto, User>();
             CreateMap<UserForRegisterDto, User>();
             CreateMap<PhotoForCreationDto, Photo>();
+            CreateMap<MessageFroCreationDto, Message>().ReverseMap();
         }
     }
 }
