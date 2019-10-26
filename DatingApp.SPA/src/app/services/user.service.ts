@@ -1,4 +1,3 @@
-import { AuthService } from './auth.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { Message } from './../models/Message';
 import { map, take } from 'rxjs/operators';

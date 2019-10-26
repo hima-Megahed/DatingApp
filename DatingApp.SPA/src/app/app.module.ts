@@ -39,6 +39,7 @@ import { FileUploadModule } from 'ng2-file-upload';
 import { ListsResolver } from './resolvers/lists.resolver';
 import { MessagesResolver } from './resolvers/messages.resolver';
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -71,9 +72,7 @@ import { MessagesResolver } from './resolvers/messages.resolver';
     }),
     JwtModule.forRoot({
       config: {
-        tokenGetter: () => {
-          return localStorage.getItem('token');
-        },
+        tokenGetter: jwtTokenGetter,
         whitelistedDomains: ['localhost:5000'],
         blacklistedRoutes: ['localhost:5000/api/auth']
       }
@@ -98,4 +97,8 @@ import { MessagesResolver } from './resolvers/messages.resolver';
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}
+
+export function jwtTokenGetter() {
+  return localStorage.getItem('token');
+}
