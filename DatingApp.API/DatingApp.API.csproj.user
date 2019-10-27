@@ -12,6 +12,7 @@
     <WebStackScaffolding_DbContextTypeFullName>DatingApp.API.Data.DatingAppDbContext</WebStackScaffolding_DbContextTypeFullName>
     <WebStackScaffolding_IsAsyncSelected>False</WebStackScaffolding_IsAsyncSelected>
     <ActiveDebugProfile>DatingApp.API</ActiveDebugProfile>
+    <NameOfLastUsedPublishProfile>.NetCorePublish</NameOfLastUsedPublishProfile>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <DebuggerFlavor>ProjectDebugger</DebuggerFlavor>
