@@ -8,7 +8,7 @@ The App is developed using Angular7 as a front-end framework to introduce the us
 - Bootatrap 4 | Font-Awesome
 - Implementing custom user SignIn/SignUp functionality
 - Dependancy Injection | Programming against Interfaces | AutoMapper
-- Using stateless authntication using JWT(Jason Web Tokens)
+- Using **Stateless** authentication using **JWT**(Jason Web Tokens)
 - Using custom error Handler to introducae error friendly alerts **ngx-Toastr**
 - Introducing user-friendly images upload system using **Cloudinary** and **ng2-file-upload**
 - Securing the App through **route Guards & Resolvers**
