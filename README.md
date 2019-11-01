@@ -1,6 +1,7 @@
 # DatingApp
 DatingApp is a dating website, You always can find your soulmate easily just on tip of a click 👫
 The App is developed using Angular7 as a front-end framework to introduce the user the **Most friendly**, **Secure** and **Lightweight** experience. 
+
 ## Technologies Stack 🤓
 - Angular 7
 - Dotnet Core 2.2
