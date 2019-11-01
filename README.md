@@ -1,7 +1,7 @@
- # DatingApp
-DatingApp is a dating website, You always can find your soulmate easily just on tip of a click.
+# DatingApp
+DatingApp is a dating website, You always can find your soulmate easily just on tip of a click 👫
 The App is developed using Angular7 as a front-end framework to introduce the user the **Most friendly**, **Secure** and **Lightweight** experience. 
-## Technologies Stack
+## Technologies Stack 🤓
 - Angular 7
 - Dotnet Core 2.2
 - SqlLite | Entity Framework Core (ORM) | Code First
@@ -16,7 +16,7 @@ The App is developed using Angular7 as a front-end framework to introduce the us
 - Implementing **Paging**, **Sorting** and **Filtering** on the server
 - Implementing Private Messaging system with notifications
 
-## Installation
+## Installation 👨🏼‍💻
 1. Fork it using git run this command in the terminal
 > git clone https://github.com/hima-Megahed/DatingApp.git
 2. Go to DatingApp.API and run
@@ -28,6 +28,6 @@ The App is developed using Angular7 as a front-end framework to introduce the us
 5. Run the Angular Application using the command
 > ng serve
 
-## Dependencies
+## Dependencies 📝
 - dotnet core runtime 2.2
 - Angular CLI 8.3.4
