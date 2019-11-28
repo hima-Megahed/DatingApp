@@ -6,16 +6,16 @@ The App is developed using Angular7 as a front-end framework to introduce the us
 - Angular 7
 - Dotnet Core 2.2
 - SqlLite | Entity Framework Core (ORM) | Code First
-- Bootatrap 4 | Font-Awesome
+- Bootstrap 4 | Font-Awesome
 - Implementing custom user SignIn/SignUp functionality
-- Dependancy Injection | Programming against Interfaces | AutoMapper
+- Dependency Injection | Programming against Interfaces | AutoMapper
 - Using **Stateless** authentication using **JWT**(Jason Web Tokens)
-- Using custom error Handler to introducae error friendly alerts **ngx-Toastr**
+- Using custom error Handler to introduce error friendly alerts **ngx-Toastr**
 - Introducing user-friendly images upload system using **Cloudinary** and **ng2-file-upload**
 - Securing the App through **route Guards & Resolvers**
-- Using Action and Srevice Filter in .Net Core
-- Implementing **Paging**, **Sorting** and **Filtering** on the server
-- Implementing Private Messaging system with notifications
+- Using Action and Service Filter in .Net Core
+- Implementing **Paging**, **Sorting**, and **Filtering** on the server
+- Implementing a Private Messaging system with notifications
 
 ## Installation 👨🏼‍💻
 1. Fork it using git run this command in the terminal
